@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الصفحة الرئيسية - Belhrach School 2as</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Tajawal", sans-serif;
+      background-color: #fff;
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #d86b00;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 10px 20px;
+    }
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-center img {
+      width: 45px;
+      height: 45px;
+    }
+
+    .menu-icon {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 18px;
+      z-index: 11;
+    }
+
+    .menu-icon div {
+      width: 100%;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -240px;
+      width: 200px;
+      height: 100%;
+      background-color: #d86b00;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+      transition: right 0.3s ease;
+      z-index: 10;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #ffffff #d86b00;
+    }
+
+    .side-menu.show {
+      right: 0;
+    }
+
+    .side-menu button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      text-align: right;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .side-menu button:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown-content {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      margin-right: 10px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    main {
+      position: relative;
+      min-height: 100vh;
+      background-color: white;
+      font-family: "Amiri", serif;
+      text-align: center;
+    }
+
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #d86b00;
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .bottom-left {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bottom-left img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .bottom-left h2 {
+      color: #d86b00;
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0;
+    }
+
+    #content-frame {
+      width: 100%;
+      height: 90vh;
+      border: none;
+      display: none;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="menu-icon" id="menuIcon">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="header-center">
+      <img src="logo.png" alt="شعار المدرسة" />
+      <h2>Belhrach School</h2>
+    </div>
+  </header>
+
+  <div class="side-menu" id="sideMenu">
+    <button>Powerd by : M.F.A Group</button>
+    <button onclick="location.reload()">تحديث 🔄</button>
+	<button id="openq">الأسئلة الشائعة؟</button> 
+	<button id="openApps">📱 التطبيقات</button>
+    <button class="openTest">🧾الأقسام</button>
+    <button class="openTest">📚كتب</button>
+    <button id="servicesBtn">🛠 الخدمات ⬇</button>
+    <div id="servicesDropdown" class="dropdown-content">
+      <button class="openT">🏗️صنع المشاريع</button>
+      <button class="openT">🖨️الطباعة</button>
+      <button class="openT">🔗صنع مواقع</button>
+    </div>
+    <button class="openTest">🖊دورات</button>
+    <button class="openTest">📉برنامج حساب المعدل</button>
+    <button class="openTest">🏛المتحف</button>
+    <button class="openTest">🗒ملخصات و دروس</button>
+    <button class="openTest">🏪متجر</button>
+    <button class="openTest">🆘مركز المساعدة</button>
+  </div>
+
+  <main id="mainContent">
+    <div id="centerText" class="center-text">
+      مرحبًا بكم في منصة Belhrach School
+    </div>
+
+    <div class="bottom-left">
+      <img src="logo1.png" alt="شعار الفريق" />
+      <h2>Powered by : M.F.A Group</h2>
+    </div>
+
+    <iframe id="content-frame"></iframe>
+  </main>
+
+  <script>
+    const menuIcon = document.getElementById("menuIcon");
+    const sideMenu = document.getElementById("sideMenu");
+    const frame = document.getElementById("content-frame");
+    const centerText = document.getElementById("centerText");
+	const openApps = document.getElementById("openApps");
+	const openQ = document.getElementById("openq");
+    const openTestBtns = document.querySelectorAll(".openTest");
+    const openTBtns = document.querySelectorAll(".openT");
+
+    menuIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sideMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!sideMenu.contains(e.target) && !menuIcon.contains(e.target)) {
+        sideMenu.classList.remove("show");
+      }
+    });
+
+    function openSection(src) {
+      frame.style.display = "block";
+      frame.src = src;
+      centerText.style.opacity = "0";
+      setTimeout(() => (centerText.style.display = "none"), 500);
+      sideMenu.classList.remove("show");
+    }
+	openApps.addEventListener("click", () => openSection("app.html")); 
+	openQ.addEventListener("click", () => openSection("q.html"));
+    openTestBtns.forEach(btn => btn.addEventListener("click", () => openSection("test.html")));
+    openTBtns.forEach(btn => btn.addEventListener("click", () => openSection("t.html")));
+
+    const servicesBtn = document.getElementById("servicesBtn");
+    const servicesDropdown = document.getElementById("servicesDropdown");
+
+    servicesBtn.addEventListener("click", () => {
+      servicesDropdown.style.display =
+        servicesDropdown.style.display === "flex" ? "none" : "flex";
+    });
+  </script>
+
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function (OneSignal) {
+      await OneSignal.init({
+        appId: "28724959-13dc-49e8-af87-a1d2c5de70f8",
+      });
+    });
+  </script>
+</body>
+</html>

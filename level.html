@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تحديد المستوى - Belhrach School</title>
+  <style>
+    body {
+      background-color: #d86b00;
+      font-family: "Tajawal", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      direction: rtl;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: #d86b00;
+      margin-bottom: 30px;
+    }
+
+    .level-btn {
+      width: 90%;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 12px;
+      background-color: #d86b00;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .level-btn:hover {
+      background-color: #b85e00;
+      transform: scale(1.03);
+    }
+
+    img.logo {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <h2>من فضلك اختر مستواك الدراسي</h2>
+
+    <button class="level-btn" onclick="goTo('1as.html')">السنة الأولى ثانوي</button>
+    <button class="level-btn" onclick="goTo('2as.html')">السنة الثانية ثانوي</button>
+    <button class="level-btn" onclick="goTo('3as.html')">السنة الثالثة ثانوي</button>
+
+  </div>
+
+  <script>
+    function goTo(page) {
+      window.location.href = page;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>none</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #d86b00;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: "Cairo", sans-serif;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .top-text {
+      position: absolute;
+      top: 15px;
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+
+    .icons {
+      position: absolute;
+      bottom: 25px;
+      display: flex;
+      gap: 30px;
+    }
+
+    .icons img {
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .icons img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الفيديو -->
+  <video autoplay muted loop playsinline>
+    <source src="video1.mp4" type="video/mp4">
+    متصفحك لا يدعم عرض الفيديو.
+  </video>
+
+  <!-- النص العلوي -->
+  <div class="top-text">
+    إذا أردت تطويرها أو اقتراح أفكار تواصل مع المطوّر
+  </div>
+
+  <!-- الأيقونات -->
+  <div class="icons">
+    <a href="https://www.instagram.com/اسم_حسابك" target="_blank">
+      <img src="instagram.jpg" alt="Instagram">
+    </a>
+
+    <a href="https://t.me/اسم_قناتك" target="_blank">
+      <img src="telegram.jpg" alt="Telegram">
+    </a>
+
+    <a href="tel:+213xxxxxxxxx">
+      <img src="phone.jpg" alt="Phone">
+    </a>
+  </div>
+
+</body>
+</html>

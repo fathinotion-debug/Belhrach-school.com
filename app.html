@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📱 التطبيقات</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Tajawal", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #d86b00;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 36px;
+      font-family: "Amiri", serif;
+    }
+
+    .apps-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px 10px;
+    }
+
+    .app-card {
+      background-color: #ff8c1a;
+      border-radius: 20px;
+      width: 320px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .app-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-bottom: 2px solid white;
+      cursor: pointer;
+    }
+
+    .slider img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: none;
+    }
+
+    .slider img.active {
+      display: block;
+    }
+
+    .app-info {
+      padding: 15px;
+    }
+
+    .app-info h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .app-info p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .buttons a {
+      background: white;
+      color: #d86b00;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #fff4e6;
+    }
+
+    @media (max-width: 700px) {
+      .apps-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>📱 التطبيقات</h1>
+
+  <div class="apps-container">
+    <!-- 🧩 تطبيق فتحي -->
+    <div class="app-card">
+      <div class="slider">
+        <img src="x.jpg" class="active" alt="تطبيق فتحي">
+        <img src="x1.jpg" alt="تطبيق فتحي">
+        <img src="x2.jpg" alt="تطبيق فتحي">
+      </div>
+      <div class="app-info">
+        <h2>تطبيق F Math v.0.0</h2>
+        <p>هو عبارة عن تطبيق يقوم بأغلب العمليات و حل المعادلات و المتراجحات و كثيرات الحدود التي درستها هذه السنة و هذا إصدار تجريبي فقط لا يزال هناك تحديثات أقوى.</p>
+        <div class="buttons">
+          <a href="F Math.apk" class="download-btn" data-app="fathi" data-platform="android">📲 تحميل للأندرويد</a>
+          <a href="fathi-ios.ipa" class="download-btn" data-app="fathi" data-platform="ios">🍎 تحميل للآيفون</a>
+        </div>
+      </div>
+    </div>
+
+  <script>
+    // 🎞️ تقليب الصور بالضغط
+    document.querySelectorAll('.slider').forEach(slider => {
+      const images = slider.querySelectorAll('img');
+      let index = 0;
+      slider.addEventListener('click', () => {
+        images[index].classList.remove('active');
+        index = (index + 1) % images.length;
+        images[index].classList.add('active');
+      });
+    });
+
+    // 🔐 أكواد خاصة لكل تطبيق ومنصة
+    const appCodes = {
+      fathi: {
+        android: "ran128", // ضع كود فتحي أندرويد
+        ios: "5678"      // ضع كود فتحي آيفون
+      },
+      madrasati: {
+        android: "9999", // ضع كود مدرستي أندرويد
+        ios: "0000"      // ضع كود مدرستي آيفون
+      }
+    };
+
+    // ⚙️ التحقق قبل التحميل
+    document.querySelectorAll('.download-btn').forEach(btn => {
+      btn.addEventListener('click', event => {
+        event.preventDefault(); // منع التحميل التلقائي
+
+        const app = btn.dataset.app;
+        const platform = btn.dataset.platform;
+        const correctCode = appCodes[app][platform];
+
+        const entered = prompt("🔒 أدخل كود التحميل:");
+
+        if (entered === correctCode) {
+          alert("✅ الكود صحيح، جاري التحميل...");
+          window.location.href = btn.getAttribute('href');
+        } else {
+          alert("❌ الكود غير صحيح، حاول مجددًا.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

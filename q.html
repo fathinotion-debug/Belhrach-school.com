@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>أسئلة شائعة</title>
+  <style>
+    :root {
+      --bg: #fff8f2;
+      --card: #ffffff;
+      --accent: #ff7b00;
+      --muted: #6b7280;
+      --radius: 14px;
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+      font-family: 'Segoe UI', Tahoma, system-ui, 'Noto Naskh Arabic', sans-serif;
+    }
+    body {
+      background: var(--bg);
+      margin: 0;
+      padding: 40px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    h1 {
+      color: var(--accent);
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .faq {
+      border: 1px solid #ffe1c2;
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 10px 14px;
+      box-shadow: 0 2px 6px rgba(255,123,0,0.1);
+      margin-bottom: 10px;
+    }
+    .question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 16px;
+      color: #333;
+    }
+    .arrow {
+      transition: transform 0.25s ease;
+      color: var(--accent);
+    }
+    .arrow.open {
+      transform: rotate(-90deg);
+    }
+    .answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      font-size: 15px;
+      color: #444;
+      line-height: 1.6;
+    }
+    .answer.open {
+      margin-top: 10px;
+      max-height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>الأسئلة الشائعة؟</h1>
+    <!-- سيتم إدراج الأسئلة هنا تلقائياً -->
+  </div>
+
+  <script>
+    // ضع هنا الأسئلة والأجوبة فقط
+    const faqs = [
+      { q: 'ما معنى M.F.Aّ؟', a: 'هي مجموعة أو شركة مختصة في صنع المواقع وتطويرها نشأت حديثا تم صنعها من طرف فتحي تزكرات و جريدي عبد السلام و مختاري مختار.' },
+      { q: 'ماهي فكرة الموقع؟', a: 'هو موقع يساعد في توفير خدمات برمجية و دراسية عن طريق تطبيقات و صنع مواقع أو مشاريع بأسعار جد منافسة و توفير خدمات أخرى مثل الطباعة و صناعة المواقع و بيع المنتجات .' },
+      { q: 'هل هناك تحديثات للموقع؟', a: 'نعم,هناك تحديثات دائمة تتمثل في تنزيل تطبيقات جديدة و منتجات و خدمات أخرى و التحديثات ستكون كل يوم جمعة.' },
+	  { q:'هل يمكن جني أرباح من الموقع؟', a:'في الحقيقة ,نعم الموقع يوفر العديد من الخدمات مثل الترويج لمنتجاتك أو بيع ملخصات أو دروس أو حتى يمكنك صنع موقع خاص بك أو الإنضمام إلى ملاك الموقع.'},
+	  { q:'هل يمكنني الإنضمام إلى مطوري الموقع ؟', a:'نعم,لأن هناك الكثير من التطبيقات التي ستحتاج المساعدة من الكثير من الناس فقط يجب أن تكون لك المؤهلات اللازمة.'},
+
+    ];
+
+    const container = document.querySelector('.container');
+
+    faqs.forEach(({ q, a }) => {
+      const faq = document.createElement('div');
+      faq.className = 'faq';
+      faq.innerHTML = `
+        <div class="question">
+          <span>${q}</span>
+          <span class="arrow">▶</span>
+        </div>
+        <div class="answer"><p>${a}</p></div>
+      `;
+      container.appendChild(faq);
+
+      const question = faq.querySelector('.question');
+      const answer = faq.querySelector('.answer');
+      const arrow = faq.querySelector('.arrow');
+
+      question.addEventListener('click', () => {
+        const open = answer.classList.toggle('open');
+        arrow.classList.toggle('open', open);
+      });
+    });
+  </script>
+</body>
+</html>

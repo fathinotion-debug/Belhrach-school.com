@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل الدخول - Belhrach School</title>
+  <style>
+    body {
+      background-color: #d86b00;
+      font-family: "Tajawal", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      direction: rtl;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: #d86b00;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    button {
+      width: 95%;
+      padding: 10px;
+      background-color: #d86b00;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #b65b00;
+    }
+
+    .google-btn {
+      background-color: white;
+      color: #444;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+    }
+
+    img.logo {
+      width: 70px;
+      height: 70px;
+    }
+
+    .switch {
+      margin-top: 10px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .switch a {
+      color: #d86b00;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <h2 id="form-title">تسجيل الدخول</h2>
+
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required />
+    <input type="password" id="password" placeholder="كلمة المرور" required />
+
+    <button id="loginBtn">تسجيل الدخول</button>
+    <button id="googleLogin" class="google-btn">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" />
+      تسجيل الدخول عن طريق غوغل
+    </button>
+
+    <div class="switch">
+      <span>ليس لديك حساب؟ <a id="toggleForm">إنشاء حساب</a></span>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      signInWithPopup,
+      GoogleAuthProvider
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    // 🔥 إعدادات Firebase الخاصة بك
+   const firebaseConfig = {
+  apiKey: "AIzaSyCBxrFMNnDgqt9HRDJk_WFJ_puTOFtIPnU",
+  authDomain: "f-website-fe313.firebaseapp.com",
+  projectId: "f-website-fe313",
+  storageBucket: "f-website-fe313.firebasestorage.app",
+  messagingSenderId: "665600280679",
+  appId: "1:665600280679:web:779d4cbcb6da033ad42cc2",
+  measurementId: "G-0VM3JBZBWT"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginBtn = document.getElementById("loginBtn");
+    const googleBtn = document.getElementById("googleLogin");
+    const toggleForm = document.getElementById("toggleForm");
+    const formTitle = document.getElementById("form-title");
+
+    let isLogin = true; // الحالة الحالية
+
+    // 🔁 تبديل بين تسجيل الدخول وإنشاء الحساب
+    toggleForm.addEventListener("click", () => {
+      isLogin = !isLogin;
+      if (isLogin) {
+        formTitle.textContent = "تسجيل الدخول";
+        loginBtn.textContent = "تسجيل الدخول";
+        toggleForm.textContent = "إنشاء حساب";
+      } else {
+        formTitle.textContent = "إنشاء حساب جديد";
+        loginBtn.textContent = "إنشاء الحساب";
+        toggleForm.textContent = "تسجيل الدخول";
+      }
+    });
+
+    // 🧾 تسجيل الدخول أو إنشاء حساب
+    loginBtn.addEventListener("click", async () => {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      try {
+        if (isLogin) {
+          await signInWithEmailAndPassword(auth, email, password);
+          alert("تم تسجيل الدخول بنجاح!");
+          window.location.href = "level.html";
+        } else {
+          await createUserWithEmailAndPassword(auth, email, password);
+          alert("تم إنشاء الحساب بنجاح!");
+          window.location.href = "level.html";
+        }
+      } catch (error) {
+        alert("حدث خطأ: " + error.message);
+      }
+    });
+
+    // 🔐 تسجيل الدخول بواسطة غوغل
+    googleBtn.addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        alert("تم تسجيل الدخول بنجاح عبر غوغل!");
+        window.location.href = "level.html";
+      } catch (error) {
+        alert("حدث خطأ: " + error.message);
+      }
+    });
+	// 🔁 بعد تسجيل الدخول، تحقق إذا كان هناك صفحة محفوظة للعودة إليها
+const redirectAfterLogin = localStorage.getItem("redirectAfterLogin");
+if (redirectAfterLogin) {
+  localStorage.removeItem("redirectAfterLogin");
+  window.location.href = redirectAfterLogin;
+} else {
+  window.location.href = "level.html"; // الافتراضية
+}
+
+  </script>
+</body>
+</html>
